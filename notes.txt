@@ -1,0 +1,3 @@
+Next Steps:
+ - Authentication for create/update/delete routes
+ - Basic Front-End for site
