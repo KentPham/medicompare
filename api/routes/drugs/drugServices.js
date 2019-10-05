@@ -18,6 +18,15 @@ exports.findDrug = async (drugName) => {
     }
 }
 
+exports.deleteDrug = async (drugId) => {
+    try {
+        const drug = await Drug.findByIdAndDelete(drugId);
+        return drug;
+    } catch (e) {
+        throw e;
+    }
+}
+
 exports.getDrugbyId = async (drugId) => {
     try {
         const drug = await Drug.findById(drugId);

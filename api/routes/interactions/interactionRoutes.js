@@ -31,9 +31,23 @@ router.route('/create')
     .post(async (req, res, next) => {
         try {
             const interaction = await interactionServices.createInteraction(req.body.data);
-            res.status(200).json ({
+            res.status(201).json ({
                 data: [interaction]
             });
+        } catch (e) {
+            next(e);
+        }
+    })
+
+router.route('/delete/:id')
+    .delete(async (req, res, next) => {
+        try {
+            const interaction = await interactionServices.deleteInteraction(req.params.id);
+            if (interaction) {
+                res.status(204).send('Record deleted');
+            } else {
+                res.status(404).send('Record not found');
+            }
         } catch (e) {
             next(e);
         }

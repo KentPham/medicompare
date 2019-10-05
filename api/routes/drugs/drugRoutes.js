@@ -27,6 +27,20 @@ router.route('/findDrug')
         }
     });
 
+router.route('/delete/:id')
+    .delete(async (req, res, next) => {
+        try {
+            const drug = await drugServices.deleteDrug(req.params.id);
+            if (drug) {
+                res.status(204).send('Record deleted');
+            } else {
+                res.status(404).send('Record not found');
+            }
+        } catch (e) {
+            next(e);
+        }
+    });
+
 router.route('/:id')
     .get(async (req, res, next) => {
         try {
@@ -43,7 +57,7 @@ router.route('/create')
     .post(async (req, res, next) => {
         try {
             const drug = await drugServices.createDrug(req.body.data);
-            res.status(200).json ({
+            res.status(201).json ({
                 data: [drug]
             });
         } catch (e) {

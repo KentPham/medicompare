@@ -18,9 +18,18 @@ exports.findInteraction = async (drugId1, drugId2) => {
     }
 }
 
-exports.createInteraction = async (drugData) => {
+exports.deleteInteraction = async (drugId) => {
     try {
-        const interaction = new Interaction(drugData);
+        const interaction = await Interaction.findByIdAndDelete(drugId);
+        return interaction;
+    } catch (e) {
+        throw e;
+    }
+}
+
+exports.createInteraction = async (interactionData) => {
+    try {
+        const interaction = new Interaction(interactionData);
         return await interaction.save();
     } catch (e) {
         throw e;
