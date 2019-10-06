@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const interactionServices = require('./interactionServices');
+const requireAdmin = require('../../middleware/adminAuth');
 
 router.route('/findDrugInteractions')
     .get(async (req, res, next) => {
@@ -28,7 +29,7 @@ router.route('/findInteraction')
 
 
 router.route('/create')
-    .post(async (req, res, next) => {
+    .post(requireAdmin, async (req, res, next) => {
         try {
             const interaction = await interactionServices.createInteraction(req.body.data);
             res.status(201).json ({
@@ -40,7 +41,7 @@ router.route('/create')
     })
 
 router.route('/delete/:id')
-    .delete(async (req, res, next) => {
+    .delete(requireAdmin, async (req, res, next) => {
         try {
             const interaction = await interactionServices.deleteInteraction(req.params.id);
             if (interaction) {

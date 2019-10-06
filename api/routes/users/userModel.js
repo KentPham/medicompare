@@ -15,7 +15,8 @@ const userSchema = new Schema ({
     access: {
         type: String,
         required: true,
-        enum: ['user', 'admin']
+        enum: ['user', 'admin'],
+        default: 'user'
     }
 });
 

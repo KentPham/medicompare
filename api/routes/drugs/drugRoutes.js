@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const drugServices = require('./drugServices');
+const requireAdmin = require('../../middleware/adminAuth');
 
 router.route('/')
     .get(async (req, res, next) => {
@@ -28,7 +29,7 @@ router.route('/findDrug')
     });
 
 router.route('/delete/:id')
-    .delete(async (req, res, next) => {
+    .delete(requireAdmin, async (req, res, next) => {
         try {
             const drug = await drugServices.deleteDrug(req.params.id);
             if (drug) {
@@ -54,7 +55,7 @@ router.route('/:id')
     });
 
 router.route('/create')
-    .post(async (req, res, next) => {
+    .post(requireAdmin, async (req, res, next) => {
         try {
             const drug = await drugServices.createDrug(req.body.data);
             res.status(201).json ({
