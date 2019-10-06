@@ -15,7 +15,7 @@ exports.isUser = async ({ email, password }) => {
         if (user) {
             const match = await user.comparePassword(password);
             if (match) {
-                return next();
+                return user;
             }
         }
     } catch (e) {

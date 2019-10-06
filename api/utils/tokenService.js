@@ -10,3 +10,7 @@ exports.issueToken = async (userData) => {
     };
     return jwt.sign(payload, SECRET);
 }
+
+exports.verifyToken = async (token) => {
+    return jwt.verify(token, SECRET);
+};

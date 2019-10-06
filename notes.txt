@@ -1,3 +1,5 @@
 Next Steps:
  - Authentication for create/update/delete routes
- - Basic Front-End for site
+
+Test Token:
+ - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWQ5OWZiZmFlYmI0Y2IzYzk4YjNlOTkxIn0sImlhdCI6MTU3MDM3Mzc5NX0.gEjehgtEUbHrZCLwONiyQxELO3dSD7E3wPhzmGF1CLY

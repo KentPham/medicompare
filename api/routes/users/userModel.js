@@ -15,8 +15,7 @@ const userSchema = new Schema ({
     access: {
         type: String,
         required: true,
-        enum: ['user', 'admin'],
-        default: 'user'
+        enum: ['user', 'admin']
     }
 });
 
@@ -34,5 +33,9 @@ userSchema.pre('save', async function(next){
         return next();
     }
 });
+
+userSchema.methods.comparePassword = function (password) {
+    return bcrypt.compare(password, this.password);
+}
 
 exports.model = mongoose.model('User', userSchema);
