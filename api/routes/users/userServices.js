@@ -22,3 +22,14 @@ exports.isUser = async ({ email, password }) => {
         throw e;
     }
 }
+
+exports.addDrug = async (drugId, {email}) => {
+    try {
+        const [user] = await User.find({ email });
+        const newList = [drugId, ...user.drug];
+        user.drug = newList;
+        return await user.save();
+    } catch (e) {
+        throw e;
+    }
+}

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userService = require('./userServices');
 const tokenService = require('../../utils/tokenService');
+const requireAdmin = require('../../middleware/adminAuth');
+const requireLogin = require('../../middleware/auth');
 
 router.route('/signup')
     .post(async (req, res, next) => {
@@ -33,5 +35,20 @@ router.route('/login')
             next(e);
         }
     });
+
+router.route('/addDrug/:id')
+    .post(async (req, res, next) => {
+        try {
+            const user = await userService.addDrug(req.params.id, req.body.data);
+            res.status(200).json({
+                data: {
+                    data: user
+                }
+            })
+
+        } catch (e) {
+            next(e);
+        }
+    })
 
 exports.router = router;

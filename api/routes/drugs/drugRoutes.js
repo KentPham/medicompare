@@ -30,7 +30,7 @@ router.route('/findDrug')
     });
 
 router.route('/delete/:id')
-    .delete(requireAdmin, requireAdmin, async (req, res, next) => {
+    .delete(requireLogin, requireAdmin, async (req, res, next) => {
         try {
             const drug = await drugServices.deleteDrug(req.params.id);
             if (drug) {
@@ -56,7 +56,7 @@ router.route('/:id')
     });
 
 router.route('/create')
-    .post(requireAdmin, requireAdmin, async (req, res, next) => {
+    .post(requireLogin, requireAdmin, async (req, res, next) => {
         try {
             const drug = await drugServices.createDrug(req.body.data);
             res.status(201).json ({

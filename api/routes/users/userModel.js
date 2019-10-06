@@ -16,7 +16,11 @@ const userSchema = new Schema ({
         type: String,
         required: true,
         enum: ['user', 'admin']
-    }
+    },
+    drug: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Drug'
+    }]
 });
 
 userSchema.pre('save', async function(next){

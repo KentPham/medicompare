@@ -6,12 +6,13 @@ module.exports = async (req, res, next) => {
         if (user) {
             if (user.access !== 'admin') {
                 next();
-                res.status(401).send("Must be an admin to create posts");
+                res.status(401).send("Must be an admin to edit the database");
             } else {
                 next();
             }
         } else {
             next();
+            res.status(401).send("You must be logged in as an admin to edit the database")
         }
     } catch (e) {
         console.error(e);
